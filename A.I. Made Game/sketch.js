@@ -35,9 +35,9 @@ if (AUTOMATION_ON) {
     [3, 0]
   ]);
   //m0.randomWeights();
-  console.table(m0.data);
+  console.table(m2.data);
   console.table(m1.data);
-  console.table(Matrix.add(m0, m1).data);
+  console.table(Matrix.dot(m2, m1).data);
 }
 
 function setup() {

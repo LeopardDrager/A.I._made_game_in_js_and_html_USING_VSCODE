@@ -57,6 +57,48 @@ class Matrix {
   
   }
 
+  //dot product of two matrices
+  static dot(m0, m1) {
+      if(m0.cols != m1.rows){
+        throw new Error("Matricies are not \"dot\" compatible");
+      }
+      let m = new Matrix(m0.rows, m1.cols);
+      for(let i = 0; i < m.rows; i++) {
+        for (let j = 0; j < m.cols; j++) {
+            let sum = 0;
+            for (let k = 0; k < m.cols; k++) {
+              sum += m0.data[i][k] * m1.data[k][j];
+            }
+            m.data[i][j] = sum;
+        }
+      }
+      return m;
+  }
+
+   //mutiply two matrices (not the dot product)
+   static multiply(m0, m1) {
+    Matrix.checkDimensions(m0,m1);
+    let m= new Matrix(m0.rows, m0.cols);
+    for(let i = 0; i < m.rows; i++){
+      for (let j = 0; j < m.cols; j++){
+      m.data[i][j] = m0.data[i][j] * m1.data[i][j];
+      }
+    }
+    return m;
+  }
+
+  //subtract two matrices
+  static subtract(m0, m1) {
+    Matrix.checkDimensions(m0,m1);
+    let m= new Matrix(m0.rows, m0.cols);
+    for(let i = 0; i < m.rows; i++){
+      for (let j = 0; j < m.cols; j++){
+      m.data[i][j] = m0.data[i][j] - m1.data[i][j];
+      }
+    }
+    return m;
+  }
+
   // apply random weights between -1 and 1 
   randomWeights(){
     for (let i = 0; i < this.rows; i++) {
