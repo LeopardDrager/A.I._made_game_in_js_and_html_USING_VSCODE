@@ -21,7 +21,7 @@ class Matrix {
       }
     } else {
       //check data integrity
-      if (data.length != this._rows || data[0].length != cols) { // Corrected parentheses
+      if (data.length != rows || data[0].length != cols) { // Corrected parentheses
         throw new Error("Incorrect data dimensions!"); // Corrected error message format
       }
     }
@@ -54,7 +54,11 @@ class Matrix {
     if (m0.rows != m1.rows|| m0.cols != m1.cols){
       throw new Error("Matrices are of different dimensions!");
     }
-  
+  }
+
+  //convert array to a one-rowed matrix
+  static convertFromArray(arr) {
+    return new Matrix(1, arr.length, [arr]);
   }
 
   //dot product of two matrices
@@ -75,6 +79,19 @@ class Matrix {
       return m;
   }
 
+
+
+  //apply a function to each cell of the given matrix
+  static map(m0,mFunction){
+    let m = new Matrix(m0.rows, m0.cols);
+    for(let i = 0; i < m.rows; i++) {
+      for (let j = 0; j < m.cols; j++) {
+        m.data[i][j] = mFunction(m0.data[i][j]);
+
+      }
+    }
+    return m;
+  }
    //mutiply two matrices (not the dot product)
    static multiply(m0, m1) {
     Matrix.checkDimensions(m0,m1);
@@ -99,6 +116,16 @@ class Matrix {
     return m;
   }
 
+  //find the transpose of the given matrix
+  static transpose(m0) {
+    let m= new Matrix(m0.cols, m0.rows);
+    for(let i = 0; i < m0.rows; i++){
+      for (let j = 0; j < m0.cols; j++){
+        m.data[j][i] = m0.data[i][j];
+      }
+    }
+    return m;
+  }
   // apply random weights between -1 and 1 
   randomWeights(){
     for (let i = 0; i < this.rows; i++) {
