@@ -23,7 +23,7 @@ let restartButton;
 const NUM_INPUTS = 2;
 const NUM_HIDDEN = 5;
 const NUM_OUTPUTS = 1;
-const NUM_SAMPLES = 1000000000000;
+const NUM_SAMPLES = 100;
 
 // set up the neural network
 var nn;
