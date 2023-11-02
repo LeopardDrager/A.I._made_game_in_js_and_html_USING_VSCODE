@@ -1,4 +1,57 @@
 "use strict";
+class neuralNetwork {
+  constructor(numInputs, numHidden, numOutputs) {
+    this._numInputs = numInputs;
+    this._numHidden = numHidden;
+    this._numOutputs = numOutputs;
+    this._weights0 = new Matrix(this._numInputs, this._numHidden);
+    this._weights1 = new Matrix(this._numHidden, this._numOutputs);
+    
+    // randomise the initial weights
+    this._weights0.randomWeights();
+    this._weights1.randomWeights();
+
+    }
+
+    get weights0() {
+      return this._weights0;
+    }
+    set weights0(weights) {
+      this._weights0 = weights;
+    }
+
+    get weights1() {
+      return this._weights1;
+    }
+    set weights1(weights) {
+      this._weights1 = weights;
+    }
+
+    feedForward(inputArray) {
+      let inputs = Matrix.convertFromArray(inputArray);
+      console.log("inputs");
+      console.table(inputs.data);
+
+      let hidden = Matrix.dot(inputs, this.weights0);
+      console.log("hidden");
+      console.table(hidden.data);
+      hidden = Matrix.map(hidden, x => sigmoid(x));
+      console.log("hidden");
+      console.table(hidden.data);
+      
+      let outputs = Matrix.dot(hidden, this.weights1);
+      outputs = Matrix.map(outputs, x => sigmoid(x));
+
+      return outputs;
+
+      //apply bias?!
+
+    }
+}
+
+function sigmoid(x){
+  return 1/ (1 + Math.exp(-x));
+}
 
 /**************** 
  Matrix Functions

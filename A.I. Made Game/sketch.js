@@ -19,29 +19,20 @@ let startTime;
 let gameDuration;
 let restartButton;
 
+//neural network parameters
+const NUM_INPUTS = 2;
+const NUM_HIDDEN = 5;
+const NUM_OUTPUTS = 1;
+
 // set up the neural network
+var nn;
 if (AUTOMATION_ON) {
-  //TODO neural network
-  let m0 = new Matrix(2, 3, [
-    [2, 1, -1],
-    [4, 3, 0]
-  ]);
-  let m1 = new Matrix(2, 3, [
-    [0, 1, -1],
-    [2, -3, 0]
-  ]);
-  let m2 = new Matrix(2, 2, [
-    [1, -1],
-    [3, 0]
-  ]);
-  //m0.randomWeights();
-  let arr = [4, 5, 6, 7];
-  // console.log(arr);
-  console.table(m1.data);
-  console.table(Matrix.transpose(m1).data);
-  // console.table(m2.data);
-  // console.table(m1.data);
-  // console.table(Matrix.dot(m2, m1).data);
+  
+    nn = new neuralNetwork(NUM_INPUTS, NUM_HIDDEN, NUM_OUTPUTS);
+    console.table(nn.weights0.data);
+    console.table(nn.weights1.data);
+
+  
 }
 
 function setup() {
