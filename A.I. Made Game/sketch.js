@@ -23,16 +23,35 @@ let restartButton;
 const NUM_INPUTS = 2;
 const NUM_HIDDEN = 5;
 const NUM_OUTPUTS = 1;
+const NUM_SAMPLES = 1000;
 
 // set up the neural network
 var nn;
 if (AUTOMATION_ON) {
-  
     nn = new neuralNetwork(NUM_INPUTS, NUM_HIDDEN, NUM_OUTPUTS);
-    console.table(nn.weights0.data);
-    console.table(nn.weights1.data);
+   
+    //train the network
+    for (let i = 0; i < NUM_SAMPLES; i++) {
+        //TEST XOR gate logic
+        //0 0 = 0 
+        //0 1 = 1 
+        //1 0 = 1 
+        //1 1 = 0 
 
-  
+        let input0 = Math.round(Math.random()); // 0 or 1
+        let input1 = Math.round(Math.random()); // 0 or 1
+        let output = input0 == input1 ? 0 : 1; // XOR gate
+
+        nn.train([input0, input1], [output]);
+
+    }
+
+    //test output
+    console.log("0, 0 = " + nn.feedForward([0, 0]).data);
+    console.log("0, 1 = " + nn.feedForward([0, 1]).data);
+    console.log("1, 0 = " + nn.feedForward([1, 0]).data);
+    console.log("1, 1 = " + nn.feedForward([1, 1]).data);
+
 }
 
 function setup() {
