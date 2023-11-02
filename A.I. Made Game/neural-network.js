@@ -7,7 +7,7 @@ class neuralNetwork {
     this._numHidden = numHidden;
     this._numOutputs = numOutputs;
     this._bias0 = new Matrix(1, this._numHidden);
-    this._bias1 = new Matrix(1, this._numoutputs);   
+    this._bias1 = new Matrix(1, this._numOutputs);   
     this._weights0 = new Matrix(this._numInputs, this._numHidden);
     this._weights1 = new Matrix(this._numHidden, this._numOutputs);
     
@@ -37,13 +37,14 @@ class neuralNetwork {
       return this._bias0;
     }
     set bias0(bias) {
-      this._bias0 = bias0;
+      this._bias0 = bias;
     }
+
     get bias1() {
       return this._bias1;
     }
     set bias1(bias) {
-      this._bias1 = bias1;
+      this._bias1 = bias;
     }
 
 
