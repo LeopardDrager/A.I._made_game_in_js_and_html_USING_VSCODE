@@ -9,7 +9,7 @@ let hitboxRadius = 25;
 let isFullscreen = false;
 let squares = [];
 let squareSize = 20;
-let spawnInterval = 1000;
+let spawnInterval = 10000; // how oftten is milliseconds it spawns a square 
 let lastSpawn = 0;
 let hearts = [1, 1, 1];
 let invincibilityFrames = 0;
@@ -20,38 +20,33 @@ let gameDuration;
 let restartButton;
 
 //neural network parameters
-const NUM_INPUTS = 2;
-const NUM_HIDDEN = 5;
+const NUM_INPUTS = 3;
+const NUM_HIDDEN = 10;
 const NUM_OUTPUTS = 1;
-const NUM_SAMPLES = 100;
+const NUM_SAMPLES = 100000;
+function setup() {
+  createCanvas(500, 500);
+}
 
 // set up the neural network
 var nn;
 if (AUTOMATION_ON) {
     nn = new neuralNetwork(NUM_INPUTS, NUM_HIDDEN, NUM_OUTPUTS);
-   
+  
     //train the network
+    let px, py, sx, sy  // The p in px and py stands for player as those refer to player possition. The s in sx and sy stands for square as those refer to square possition
     for (let i = 0; i < NUM_SAMPLES; i++) {
-        //TEST XOR gate logic
-        //0 0 = 0 
-        //0 1 = 1 
-        //1 0 = 1 
-        //1 1 = 0 
 
-        let input0 = Math.round(Math.random()); // 0 or 1
-        let input1 = Math.round(Math.random()); // 0 or 1
-        let output = input0 == input1 ? 0 : 1; // XOR gate
+        // random sqaure location (does not go offscreen just bounces off walls and comes back)
+        sx = Math.random() * 
+        (function setup() { createCanvas(500, 500);}.width)
+        sy = Math.random() * 
+        (function setup() { createCanvas(500, 500);}.height)
 
-        nn.train([input0, input1], [output]);
-
-    }
-
-    //test output
-    console.log("0, 0 = " + nn.feedForward([0, 0]).data);
-    console.log("0, 1 = " + nn.feedForward([0, 1]).data);
-    console.log("1, 0 = " + nn.feedForward([1, 0]).data);
-    console.log("1, 1 = " + nn.feedForward([1, 1]).data);
-
+        // player possition
+        // px = Math.random() * 
+      
+      }
 }
 
 function setup() {
